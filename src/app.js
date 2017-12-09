@@ -27,9 +27,10 @@ function run() {
     // and gives them the store as context
     <Provider store={store}>
       <Router history={history}>
-        <Route path='/' component={App}>
+        <div>
+          <Route path='/' component={App} />
           <Route path='/deck/:deckId' component={VisibleCards} />
-        </Route>
+        </div>
       </Router>
   </Provider>
   ), document.getElementById('root'));

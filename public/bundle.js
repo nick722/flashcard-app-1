@@ -24939,8 +24939,9 @@ function run() {
       _reactRouter.Router,
       { history: history },
       _react2.default.createElement(
-        _reactRouter.Route,
-        { path: '/', component: _App2.default },
+        'div',
+        null,
+        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default }),
         _react2.default.createElement(_reactRouter.Route, { path: '/deck/:deckId', component: _VisibleCards2.default })
       )
     )
