@@ -1,28 +1,32 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux';
-import { addDeck, showAddDeck, hideAddDeck } from './actions';
+// Provider component takes the store and pass it
+// around differen components
+import { Provider } from 'react-redux';
+import { Router, Route, browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import * as reducers from './reducers';
+reducers.routing = routerReducer;
+
 import App from './components/App';
-import Sidebar from './components/Sidebar';
 
 // Main reducer
 const store = createStore(combineReducers(reducers));
+const history = syncHistoryWithStore(browserHistory, store);
 
 // RENDERING
 function run() {
   let state = store.getState();
-  console.log(state);
-  ReactDOM.render((<App> 
-    <Sidebar 
-      decks={state.decks} 
-      addingDeck={state.addingDeck} 
-      // dispatch actions, make state changes to the store
-      addDeck={name => store.dispatch(addDeck(name))}
-      showAddDeck={() => store.dispatch(showAddDeck())}
-      hideAddDeck={() => store.dispatch(hideAddDeck())}
-      /> 
-  </App>), document.getElementById('root'));
+  ReactDOM.render((
+    // Provider is wrapping all components and
+    // and gives them the store as context
+    <Provider store={store}>
+      <Router history={history}>
+        <Route path='/' component={App}></Route>
+      </Router>
+  </Provider>
+  ), document.getElementById('root'));
 }
 
 run();

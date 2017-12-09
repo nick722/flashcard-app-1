@@ -1,10 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// connet is used to connect mapping functions to 
+// presentational component
+import { connect } from 'react-redux';
+import { addDeck, showAddDeck, hideAddDeck } from '../actions';
 var createReactClass = require('create-react-class');
 
-// DEPRECATED class creation via variable required from 'create-react-class'
-const Sidebar = createReactClass({
+// Takes the current state object from the store and
+// return data that presentational component
+// will need
+// Parameters are taken from the state
+const mapStateToProps = ({decks, addingDeck}) => ({
+  decks,
+  addingDeck
+}); 
 
+// Map dispatch function to 3 callbacks for Sidebar
+const mapDispatchToProps = dispatch => ({
+  addDeck: name => dispatch(addDeck(name)),
+  showAddDeck: () => dispatch(showAddDeck()),
+  hideAddDeck: () => dispatch(hideAddDeck())
+});
+
+// DEPRECATED class creation via variable required from 'create-react-class'
+// Sidebar is a presentational component
+const Sidebar = createReactClass({
   // lifecircle method
   // to focus on input bar when 'New Deck' button is clicked
   componentDidUpdate() {
@@ -42,4 +62,5 @@ const Sidebar = createReactClass({
   }
 });
 
-export default Sidebar;
+// Exporting container component
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
