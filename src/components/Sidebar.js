@@ -4,13 +4,9 @@ import ReactDOM from 'react-dom';
 // presentational component
 import { connect } from 'react-redux';
 import { addDeck, showAddDeck, hideAddDeck } from '../actions';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 var createReactClass = require('create-react-class');
 
-// Takes the current state object from the store and
-// return data that presentational component
-// will need
-// Parameters are taken from the state
 const mapStateToProps = ({decks, addingDeck}) => ({
   decks,
   addingDeck
@@ -24,12 +20,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 // DEPRECATED class creation via variable required from 'create-react-class'
-// Sidebar is a presentational component
 const Sidebar = createReactClass({
-  // lifecircle method
-  // to focus on input bar when 'New Deck' button is clicked
   componentDidUpdate() {
-    // el means element
     var el = ReactDOM.findDOMNode(this.refs.add);
     if (el) el.focus();
   },
@@ -39,9 +31,6 @@ const Sidebar = createReactClass({
     return (
       <div className='Sidebar'>
         <h2>All Decks </h2>
-
-        <button onClick={ e => this.props.showAddDeck() }> New Deck </button>
-
           <ul>
           {props.decks.map((deck, i) => 
             <li key={i}> 
