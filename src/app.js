@@ -4,8 +4,8 @@ import { createStore, combineReducers } from 'redux';
 // Provider component takes the store and pass it
 // around differen components
 import { Provider } from 'react-redux';
-import { Router, Route/*, browserHistory*/ } from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { Router, Route/*, browserHistory*/,Switch  } from 'react-router';
+import { syncHistoryWithStore, routerReducer, ConnectedRouter  } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
 import * as reducers from './reducers';
 reducers.routing = routerReducer;
@@ -17,6 +17,7 @@ import VisibleCards from './components/VisibleCards';
 const store = createStore(combineReducers(reducers));
 
 // const history = syncHistoryWithStore(browserHistory, store);
+// const history = ConnectedRouter (createBrowserHistory(), store);
 const history = syncHistoryWithStore(createBrowserHistory(), store);
 
 // RENDERING
@@ -28,8 +29,8 @@ function run() {
     <Provider store={store}>
       <Router history={history}>
         <div>
-          <Route path='/' component={App} />
-          <Route path='/deck/:deckId' component={VisibleCards} />
+        <Route path='/' component={App} />
+        <Route path='/deck/:deckId' component={VisibleCards} />
         </div>
       </Router>
   </Provider>

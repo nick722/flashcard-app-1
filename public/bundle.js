@@ -25381,19 +25381,18 @@ module.exports = warning;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import * as Redux from 'redux';
-
 // Action creators
+// export const addDeck = name => ({ type: 'ADD_DECK', data: name });
+// export const showAddDeck = name => ({ type: 'SHOW_ADD_DECK', data: name });
+// export const hideAddDeck = name => ({ type: 'HIDE_ADD_DECK', data: name });
 var addDeck = exports.addDeck = function addDeck(name) {
   return { type: 'ADD_DECK', data: name };
 };
-var showAddDeck = exports.showAddDeck = function showAddDeck(name) {
-  return { type: 'SHOW_ADD_DECK', data: name };
+var showAddDeck = exports.showAddDeck = function showAddDeck() {
+  return { type: 'SHOW_ADD_DECK' };
 };
-var hideAddDeck = exports.hideAddDeck = function hideAddDeck(name) {
-  return { type: 'HIDE_ADD_DECK', data: name };
+var hideAddDeck = exports.hideAddDeck = function hideAddDeck() {
+  return { type: 'HIDE_ADD_DECK' };
 };
 
 },{}],112:[function(require,module,exports){
@@ -25442,6 +25441,7 @@ reducers.routing = _reactRouterRedux.routerReducer;
 var store = (0, _redux.createStore)((0, _redux.combineReducers)(reducers));
 
 // const history = syncHistoryWithStore(browserHistory, store);
+// const history = ConnectedRouter (createBrowserHistory(), store);
 var history = (0, _reactRouterRedux.syncHistoryWithStore)((0, _history.createBrowserHistory)(), store);
 
 // RENDERING
@@ -25484,22 +25484,39 @@ var _Sidebar = require('./Sidebar');
 
 var _Sidebar2 = _interopRequireDefault(_Sidebar);
 
+var _reactRedux = require('react-redux');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var App = function App(_ref) {
-  var children = _ref.children;
+var mapStateToProps = function mapStateToProps(props, _ref) {
+  var deckId = _ref.params.deckId;
+  return {
+    deckId: deckId
+  };
+};
+
+var App = function App(_ref2) {
+  var deckId = _ref2.deckId,
+      children = _ref2.children;
 
   return _react2.default.createElement(
     'div',
     { className: 'app' },
     _react2.default.createElement(_Sidebar2.default, null),
+    _react2.default.createElement(
+      'h1',
+      null,
+      ' Deck ',
+      deckId,
+      ' '
+    ),
     children
   );
 };
 
-exports.default = App;
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
 
-},{"./Sidebar":114,"react":97}],114:[function(require,module,exports){
+},{"./Sidebar":114,"react":97,"react-redux":60}],114:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
