@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 // presentational component
 import { connect } from 'react-redux';
 import { addDeck, showAddDeck, hideAddDeck } from '../actions';
+import { Link } from 'react-router-dom';
 var createReactClass = require('create-react-class');
 
 // Takes the current state object from the store and
@@ -43,7 +44,9 @@ const Sidebar = createReactClass({
 
           <ul>
           {props.decks.map((deck, i) => 
-            <li key={i}> {deck.name} </li>
+            <li key={i}> 
+            <Link to={`/deck/${deck.id}`}> {deck.name} </Link>
+            </li>
           )}
           </ul>
         {/* if props.addingDeck than...*/}
