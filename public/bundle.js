@@ -27379,7 +27379,7 @@ var Sidebar = createReactClass({
 
     return _react2.default.createElement(
       'div',
-      { className: 'Sidebar' },
+      { className: 'sidebar' },
       _react2.default.createElement(
         'h2',
         null,
@@ -27730,7 +27730,6 @@ var showBack = exports.showBack = function showBack(state, action) {
 };
 
 var cardFilter = exports.cardFilter = function cardFilter(state, action) {
-  console.log(state);
   switch (action.type) {
     case 'FILTER_CARDS':
       return action.data;

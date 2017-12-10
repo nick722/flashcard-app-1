@@ -8,7 +8,6 @@ export const showBack = (state, action) => {
 };
 
 export const cardFilter = (state, action) => {
-  console.log(state);
   switch (action.type) {
     case 'FILTER_CARDS':
       return action.data;

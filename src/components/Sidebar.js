@@ -29,7 +29,7 @@ const Sidebar = createReactClass({
     let props = this.props;
 
     return (
-      <div className='Sidebar'>
+      <div className='sidebar'>
         <h2>All Decks </h2>
           <ul>
           {props.decks.map((deck, i) => 
