@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// connet is used to connect mapping functions to 
-// presentational component
 import { connect } from 'react-redux';
 import { addDeck, showAddDeck, hideAddDeck } from '../actions';
 import { Link } from 'react-router';
@@ -19,7 +17,6 @@ const mapDispatchToProps = dispatch => ({
   hideAddDeck: () => dispatch(hideAddDeck())
 });
 
-// DEPRECATED class creation via variable required from 'create-react-class'
 const Sidebar = createReactClass({
   componentDidUpdate() {
     var el = ReactDOM.findDOMNode(this.refs.add);

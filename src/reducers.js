@@ -39,7 +39,6 @@ export const cards = (state, action) => {
       return state.filter(c => c.id !== action.data);
 
     default: 
-      // return the current state or an empty array
       return state || [];
   }
 };
