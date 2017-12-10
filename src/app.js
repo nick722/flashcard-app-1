@@ -14,6 +14,10 @@ import * as localStore from './localStore';
 
 import App from './components/App';
 import VisibleCards from './components/VisibleCards';
+import NewCardModal from './components/NewCardModal';
+import EditCardModal from './components/EditCardModal';
+import StudyModal from './components/StudyModal';
+
 
 // Main reducer
 const store = createStore(combineReducers(reducers), localStore.get());
@@ -32,7 +36,11 @@ function run() {
     <Provider store={store}>
       <Router history={history}>
           <Route path='/' component={App} >
-            <Route path='/deck/:deckId' component={VisibleCards} />
+            <Route path='/deck/:deckId' component={VisibleCards}>
+              <Route path='/deck/:deckId/new' component={NewCardModal} />
+              <Route path='/deck/:deckId/edit/:cardId' component={EditCardModal} />
+              <Route path='/deck/:deckId/study' component={StudyModal} />
+            </Route>
           </Route>
       </Router>
   </Provider>

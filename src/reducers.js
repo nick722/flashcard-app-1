@@ -1,24 +1,46 @@
-// Pass a CARDS REDUCER (function) with previous state and an action
+export const showBack = (state, action) => {
+  switch(action.type) {
+    case 'SHOW_BACK':
+      return action.data || false;
+    default:
+      return state || false;
+  }
+};
+
+export const cardFilter = (state, action) => {
+  console.log(state);
+  switch (action.type) {
+    case 'FILTER_CARDS':
+      return action.data;
+    default:
+      return state || '';
+  }
+};
+
 export const cards = (state, action) => {
-  // Deciding what to do depending on what action happend
   switch (action.type) {
 
     case 'ADD_CARD':
       // Create a new Object based on another one
       let newCard = Object.assign({}, action.data, {
         score: 1,
-        // Unique id based on number, made of current date
         id: +new Date
       });
 
-      // Add new card to state
       return state.concat([newCard]);
 
-    // If we receive an action, that we haven't planned for
+    case 'UPDATE_CARD': 
+      let cardUpdate = action.data;
+      return state.map(card => (card.id !== cardUpdate.id) ? 
+        card :
+        Object.assign({} , card, cardUpdate)
+      );
+
+    case 'DELETE_CARD':
+      return state.filter(c => c.id !== action.data);
+
     default: 
-      // return the curren state
-      // Or when store creates for the first time ->
-      // -> return an empty object
+      // return the current state or an empty array
       return state || [];
   }
 };
